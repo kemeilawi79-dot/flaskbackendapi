@@ -86,6 +86,7 @@ def users():
     # fetch all users
     users = cursor.fetchall()
     return jsonify(users)
+
 # fetch all the customers
 @app.route("/api/customers")
 # define customers
@@ -100,6 +101,23 @@ def customers():
     #fetch all customers
     customers = cursor.fetchall()
     return jsonify(customers)
+
+# fetch all the suppliers
+@app.route("/api/supplier")
+# define suppliers
+def supplier():
+    # connection to database
+    connection = get_connection()
+    # define the cursor
+    cursor = connection.cursor()
+    sql = "SELECT * FROM users WHERE role = 'supplier';"
+    #execute/run query
+    cursor.execute(sql)
+    #fetch all suppliers
+    supplier = cursor.fetchall()
+    return jsonify(supplier)
+
+
 
 
 
