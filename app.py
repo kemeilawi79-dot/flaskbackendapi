@@ -131,6 +131,30 @@ def admin():
     # fetch all admins
     admin = cursor.fetchall()
     return jsonify(admin)
+# medicine
+# add medicine
+@app.route("/api/addmedicine", methods=["POST"])
+# define the function
+def addmedicine():
+    name = request.form["name"]
+    description = request.form["description"]
+    price = request.form["price"]
+    stock = request.form["stock"]
+    supplier_id = request.fofrm["supplier_id"]
+
+    # def connection to database
+    connection = get_connection()
+    # define the cursor
+    cursor = connection.cursor()
+    sql = "INSERT INTO medicines(name, description, price, stock, supplier_id)VALUES (%s,%s,%s,%s,%s);"
+    # define data
+    data = "name,description,price,stock,supplier_id"
+    # execute/run query
+    cursor.execute(sql, data)
+    # commit/save changes
+    connection.commit()
+    return jsonify({"message":"medicine added successfully"})
+
 
 
 
