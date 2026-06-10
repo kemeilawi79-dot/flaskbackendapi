@@ -72,7 +72,20 @@ def login() :
         return jsonify({"message" : "Invalid email or password" })
     # if email and password correct
     return jsonify({ "message" : "Login successful" , "user" : user})
-
+# fetch all the users
+@app.route("/api/users")
+# define the function
+def users():
+    # connection to database
+    connection = get_connection()
+    # edfine the cursor
+    cursor = connection.cursor()
+    sql = "select * from users"
+    # execute/run query
+    cursor.execute(sql)
+    # fetch all users
+    users = cursor.fetchall()
+    return jsonify(users)
 
 # run the app
 app.run(debug=True)
