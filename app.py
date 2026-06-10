@@ -117,6 +117,21 @@ def supplier():
     supplier = cursor.fetchall()
     return jsonify(supplier)
 
+# fetach all the admins
+@app.route("/api/admin")
+# define admin
+def admin():
+    # connection to database
+    connection = get_connection()
+    # define the cursor
+    cursor = connection.cursor()
+    sql = "SELECT * FROM users WHERE role = 'admin';"
+    # execute/run query
+    cursor.execute(sql)
+    # fetch all admins
+    admin = cursor.fetchall()
+    return jsonify(admin)
+
 
 
 
